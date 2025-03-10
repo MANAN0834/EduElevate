@@ -17,6 +17,7 @@ const OTPSchema = new mongoose.Schema({
 });
 //function to send mail before db entry
 async function sendVerificationEmail(email,otp){
+
 	try{
 		const mailResponse=await mailSender(email,"Verification mail from EduElevate platform ",otp);
 		console.log("Email sent successfully")
@@ -26,6 +27,7 @@ async function sendVerificationEmail(email,otp){
 	}
 }
 OTPSchema.pre("save",async function(next){
+	console.log("INSIDE PRE HOOK")
 	await sendVerificationEmail(this.email,this.otp);
 	next();
 })

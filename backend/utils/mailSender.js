@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer")
-
+require("dotenv").config();
 const mailSender = async (email, title, body) => {
   try {
     let transporter = nodemailer.createTransport({
@@ -12,7 +12,7 @@ const mailSender = async (email, title, body) => {
     })
 
     let info = await transporter.sendMail({
-      from: `"Studynotion || CodeHelp" <${process.env.MAIL_USER}>`, // sender address
+      from: `EduElevate || Manan <${process.env.MAIL_USER}>`, // sender address
       to: `${email}`, // list of receivers
       subject: `${title}`, // Subject line
       html: `${body}`, // html body
