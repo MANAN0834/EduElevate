@@ -3,13 +3,13 @@ const User = require("../models/User")
 const Otp = require("../models/OTP")
 const jwt = require("jsonwebtoken")
 const otpgenerator = require("otp-generator")
-const mailSender = require("../utils/mailSender")
+const mailSender = require("../utils/mailSender");
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
 const Profile = require("../models/Profile")
 require("dotenv").config()
 exports.signup=async (req,res)=>{
     try{
-        const {firstName,lastName,email,password,confirmPassword,accountType,contactNumber}=req.body;
+        const {firstName,lastName,email,password,confirmPassword,accountType,otp}=req.body;
         if(!firstName || !lastName || !email || !password || !confirmPassword){
             return res.status(400).json({
                 success:false,
@@ -22,7 +22,7 @@ exports.signup=async (req,res)=>{
                 message:"Password and confirmPassword doesnot match"
             })
         }
-        const checkUser=await User.find({email});
+        const checkUser=await User.findOne({email});
         if(checkUser){
             return res.status(401).json({
                 success:false,
@@ -31,12 +31,13 @@ exports.signup=async (req,res)=>{
         }
         //otp validation
         const recentOtp=await Otp.find({email}).sort({createdAt:-1}).limit(1);
+        console.log("Recent otp ",recentOtp);
         if(recentOtp.length===0){
             return res.status(401).json({
                 success:false,
                 message:"OTP not found"
             })
-        }else if(otp!==recentOtp.otp){
+        }else if(otp !== recentOtp[0].otp){
             return res.status(401).json({
                 success:false,
                 message:"Invalid otp"
@@ -44,7 +45,7 @@ exports.signup=async (req,res)=>{
         }
         //hashing password
         const hashedPassword = await bcrypt.hash(password, 10)
-
+        console.log("Hashed password ",hashedPassword);
         // Create the user
         let approved = ""
         approved === "Instructor" ? (approved = false) : (approved = true)
@@ -60,12 +61,12 @@ exports.signup=async (req,res)=>{
           firstName,
           lastName,
           email,
-          contactNumber,
           password: hashedPassword,
           accountType: accountType,
           approved: approved,
           additionalDetails: profileDetails._id,
-          image: `https://api.dicebar.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+          image: `https://api.dicebear.com/5.x/initials/svg?seed=${encodeURIComponent(firstName + " " + lastName)}`,
+
         })
     
         return res.status(200).json({
