@@ -134,9 +134,10 @@ exports.updateDisplayPicture = async (req, res) => {
       data: updatedProfile,
     })
   } catch (error) {
+    console.log("ERROR ",error)
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message:"Error in updateDisplayController "+ error.message,
     })
   }
 }
