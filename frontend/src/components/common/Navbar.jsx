@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react"
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { BsChevronDown } from "react-icons/bs"
-// import { useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link, matchPath, useLocation } from "react-router-dom"
 
 import logo from "../../assets/Logo/ChatGPT Image Apr 5, 2025, 11_57_07 PM.png"
 import { NavbarLinks } from "../../data/navbar-links"
-// import { apiConnector } from "../../services/apiConnector"
-// import { categories } from "../../services/apis"
-// import { ACCOUNT_TYPE } from "../../utils/constants"
-// import ProfileDropdown from "../core/Auth/ProfileDropdown"
+import { apiConnector } from "../../services/apiConnector"
+import { categories } from "../../services/apis"
+import { ACCOUNT_TYPE } from "../../utils/constants"
+import ProfileDropdown from "../core/Auth/ProfileDropdown"
 
+// const subLinks=[
+//   {
+//     title:"python",
+//     link:"/catalog/python"
+//   },
+//   {
+//     title:"web dev",
+//     link:"/catalog/web-development"
+//   }
+// ]
 function Navbar() {
-  // const { token } = useSelector((state) => state.auth)
-  // const { user } = useSelector((state) => state.profile)
-  // const { totalItems } = useSelector((state) => state.cart)
+  const { token } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.profile)
+  const { totalItems } = useSelector((state) => state.cart)
   const location = useLocation()
 
   const [subLinks, setSubLinks] = useState([])
@@ -113,7 +123,7 @@ function Navbar() {
           </ul>
         </nav>
         {/* Login / Signup / Dashboard */}
-        {/* <div className="hidden items-center gap-x-4 md:flex">
+        <div className="hidden items-center gap-x-4 md:flex">
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
@@ -139,10 +149,10 @@ function Navbar() {
             </Link>
           )}
           {token !== null && <ProfileDropdown />}
-        </div> */}
-        {/* <button className="mr-4 md:hidden">
+        </div>
+        <button className="mr-4 md:hidden">
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
-        </button> */}
+        </button>
       </div>
     </div>
   )
