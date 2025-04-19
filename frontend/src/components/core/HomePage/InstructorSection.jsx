@@ -1,9 +1,9 @@
 import React from 'react'
 import CTAButton from "../../../components/core/HomePage/Button";
 import { FaArrowRight } from "react-icons/fa";
-import Instructor from "../../../assets/Images/Instructor.png";
+// import Instructor from "../../../assets/Images/Instructor.png";
 import HighlightText from './HighlightText';
-
+import Instructor from "../../../assets/Images/aboutus1.webp";
 const InstructorSection = () => {
   return (
     <div>
@@ -12,7 +12,7 @@ const InstructorSection = () => {
             <img
               src={Instructor}
               alt=""
-              className="shadow-white shadow-[-20px_-20px_0_0]"
+              className="shadow-white shadow-[-20px_-20px_0_0] "
             />
           </div>
           <div className="lg:w-[50%] flex gap-10 flex-col">

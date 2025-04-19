@@ -125,6 +125,12 @@ module.exports = {
       },
     },
     extend: {
+      colors:{
+        neutral:'#262626',
+        gray:'#F3F4F8',
+        customBlack:'#545454',
+        customYellow:'#FFF5ED'
+      },
       maxWidth: {
         maxContent: "1260px",
         maxContentTab: "650px"
