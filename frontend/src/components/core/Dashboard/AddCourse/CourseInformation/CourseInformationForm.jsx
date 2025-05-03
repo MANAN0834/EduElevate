@@ -127,13 +127,13 @@ export default function CourseInformationForm() {
         const result = await editCourseDetails(formData, token)
         setLoading(false)
         if (result) {
-          dispatch(setStep(2))
+          dispatch(setStep(2)) 
           dispatch(setCourse(result))
         }
       } else {
         toast.error("No changes made to the form")
       }
-      return
+      return;
     }
 
     const formData = new FormData()
@@ -146,6 +146,7 @@ export default function CourseInformationForm() {
     formData.append("status", COURSE_STATUS.DRAFT)
     formData.append("instructions", JSON.stringify(data.courseRequirements))
     formData.append("thumbnailImage", data.courseImage)
+    console.log("THUMBNAIL ME   ",data.courseImage)
     setLoading(true)
     const result = await addCourseDetails(formData, token)
     if (result) {
@@ -153,6 +154,8 @@ export default function CourseInformationForm() {
       dispatch(setCourse(result))
     }
     setLoading(false)
+    // console.log(formData);
+    // console.log(result);
   }
 
   return (

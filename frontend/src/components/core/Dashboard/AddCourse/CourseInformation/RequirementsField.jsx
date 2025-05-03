@@ -63,14 +63,14 @@ export default function RequirementsField({
       {requirementsList.length > 0 && (
         <ul className="mt-2 list-inside list-disc">
           {requirementsList.map((requirement, index) => (
-            <li key={index} className="flex items-center text-richblack-5">
+            <li key={index} className="flex items-center text-black">
               <span>{requirement}</span>
               <button
                 type="button"
-                className="ml-2 text-xs text-pure-greys-300 "
+                className="ml-2 text-md border border-yellow-5 rounded-md text-blue-600 bg-yellow-5 font-bold "
                 onClick={() => handleRemoveRequirement(index)}
               >
-                clear
+                remove
               </button>
             </li>
           ))}

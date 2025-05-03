@@ -1,5 +1,5 @@
-const BASE_URL ="https://eduelevate-ybuc.onrender.com"
-// "http://localhost:4000/api/v1"
+const BASE_URL ="http://localhost:4000/api/v1"
+// "https://edu-elevate-vnq3.vercel.app/"
 // "https://edtechp.onrender.com" //deployed backend base url
 
 // AUTH ENDPOINTS
