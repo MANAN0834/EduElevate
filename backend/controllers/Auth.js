@@ -180,7 +180,7 @@ exports.sendotp = async (req, res) => {
     console.log("OTP", otp)
     console.log("Result", result)
     while (result) {
-      otp = optgenerator.generate(6, {
+      otp = otpgenerator.generate(6, {
         upperCaseAlphabets: false,
       })
     }
