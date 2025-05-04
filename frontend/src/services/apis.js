@@ -1,6 +1,6 @@
-const BASE_URL ="http://localhost:4000/api/v1"
-// "https://edu-elevate-vnq3.vercel.app/"
-// "https://edtechp.onrender.com" //deployed backend base url
+const BASE_URL ="https://eduelevate-pg5j.onrender.com"
+// http://localhost:4000/api/v1
+
 
 // AUTH ENDPOINTS
 export const endpoints = {
