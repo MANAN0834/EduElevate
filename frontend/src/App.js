@@ -20,9 +20,9 @@ import MyProfile from "./components/core/Dashboard/MyProfile"
 import Settings from "./components/core/Dashboard/Settings"
 // import VideoDetails from "./components/core/ViewCourse/VideoDetails"
 import About from "./pages/About"
-// import Catalog from "./pages/Catalog"
+import Catalog from "./pages/Catalog"
 import Contact from "./pages/Contact"
-import CourseDetails from "./pages/CourseDetails"
+import CourseDetails from './pages/CourseDetails'
 import Dashboard from "./pages/Dashboard"
 import Error from "./pages/Error"
 import ForgotPassword from "./pages/ForgotPassword"
@@ -57,8 +57,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
-        {/* <Route path="catalog/:catalogName" element={<Catalog />} /> */}
         {/* Open Route - for Only Non Logged in User */}
         <Route
           path="login"

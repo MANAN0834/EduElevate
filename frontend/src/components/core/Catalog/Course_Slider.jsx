@@ -8,7 +8,7 @@ import "swiper/css/free-mode"
 import "swiper/css/pagination"
 // import "../../.."
 // Import required modules
-import { FreeMode, Pagination } from "swiper"
+import { FreeMode, Pagination } from 'swiper';
 
 // import { getAllCourses } from "../../services/operations/courseDetailsAPI"
 import Course_Card from "./Course_Card"
@@ -36,10 +36,10 @@ function Course_Slider({ Courses }) {
           ))}
         </Swiper>
       ) : (
-        <p className="text-xl text-richblack-5">No Course Found</p>
+        <p className="text-xl text-black">No Course Found</p>
       )}
     </>
   )
 }
 
-export default Course_Slider
+export default Course_Slider;

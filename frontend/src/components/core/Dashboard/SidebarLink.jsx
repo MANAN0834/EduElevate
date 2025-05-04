@@ -24,7 +24,7 @@ export default function SidebarLink({ link, iconName }) {
       } transition-all duration-200`}
     >
       <span
-        className={`absolute left-0 top-0 h-full w-[0.15rem] bg-yellow-50 ${
+        className={`absolute left-0 top-0 h-full w-[0.15rem] bg-caribbeangreen-50 ${
           matchRoute(link.path) ? "opacity-100" : "opacity-0"
         }`}
       ></span>

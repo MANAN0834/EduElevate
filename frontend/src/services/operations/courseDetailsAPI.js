@@ -1,7 +1,6 @@
 import { toast } from "react-hot-toast"
-
 import { updateCompletedLectures } from "../../slices/viewCourseSlice"
-// import { setLoading } from "../../slices/profileSlice";
+import { setLoading } from "../../slices/profileSlice";
 import { apiConnector } from "../apiConnector"
 import { courseEndpoints } from "../apis"
 
@@ -329,7 +328,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
   } catch (error) {
     console.log("COURSE_FULL_DETAILS_API API ERROR............", error)
     result = error.response.data
-    // toast.error(error.response.data.message);
+    toast.error(error.response.data.message);
   }
   toast.dismiss(toastId)
   //   dispatch(setLoading(false));

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { BiInfoCircle } from "react-icons/bi"
 import { HiOutlineGlobeAlt } from "react-icons/hi"
-import { ReactMarkdown } from "react-markdown"
+import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -13,7 +13,7 @@ import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
 import { formatDate } from "../services/formatDate"
 import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
 import { BuyCourse } from "../services/operations/studentFeaturesAPI"
-import GetAvgRating from "../utils/avgRating"
+import GetAvgRating from "../utils/avgRating";
 import Error from "./Error"
 
 function CourseDetails() {
@@ -71,8 +71,9 @@ function CourseDetails() {
   useEffect(() => {
     let lectures = 0
     response?.data?.courseDetails?.courseContent?.forEach((sec) => {
-      lectures += sec.subSection.length || 0
+      lectures += sec?.subSection?.length || 0
     })
+    
     setTotalNoOfLectures(lectures)
   }, [response])
 
@@ -97,14 +98,13 @@ function CourseDetails() {
     courseContent,
     ratingAndReviews,
     instructor,
-    studentsEnroled,
+    studentsEnrolled,
     createdAt,
   } = response.data?.courseDetails
 
   const handleBuyCourse = () => {
     if (token) {
-      // console.log("hello" + courseId)
-      BuyCourse(token, courseId, user, navigate, dispatch)
+      BuyCourse(token, [courseId], user, navigate, dispatch)
       return
     }
     setConfirmationModal({
@@ -152,8 +152,9 @@ function CourseDetails() {
               <div className="text-md flex flex-wrap items-center gap-2">
                 <span className="text-yellow-25">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnroled.length} students enrolled`}</span>
+                <span>{`(${ratingAndReviews?.length || 0} reviews)`}</span>
+
+                <span>{`${studentsEnrolled?.length ||0} students enrolled`}</span>
               </div>
               <div>
                 <p className="">
@@ -195,8 +196,8 @@ function CourseDetails() {
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
           {/* What will you learn section */}
           <div className="my-8 border border-richblack-600 p-8">
-            <p className="text-3xl font-semibold">What you'll learn</p>
-            <div className="mt-5">
+            <p className="text-3xl font-semibold text-black" >What you'll learn</p>
+            <div className="mt-5 text-black">
               <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
             </div>
           </div>
@@ -204,20 +205,21 @@ function CourseDetails() {
           {/* Course Content Section */}
           <div className="max-w-[830px] ">
             <div className="flex flex-col gap-3">
-              <p className="text-[28px] font-semibold">Course Content</p>
+              <p className="text-[28px] font-semibold text-black">Course Content</p>
               <div className="flex flex-wrap justify-between gap-2">
                 <div className="flex gap-2">
-                  <span>
-                    {courseContent.length} {`section(s)`}
-                  </span>
-                  <span>
+                <span className="text-black">
+  {courseContent?.length || 0} {`section(s)`}
+</span>
+
+                  <span className="text-black">
                     {totalNoOfLectures} {`lecture(s)`}
                   </span>
-                  <span>{response.data?.totalDuration} total length</span>
+                  <span className="text-black">{response.data?.totalDuration} total length</span>
                 </div>
                 <div>
                   <button
-                    className="text-yellow-25"
+                    className="text-caribbeangreen-50 font-bold"
                     onClick={() => setIsActive([])}
                   >
                     Collapse all sections
@@ -240,7 +242,7 @@ function CourseDetails() {
 
             {/* Author Details */}
             <div className="mb-12 py-4">
-              <p className="text-[28px] font-semibold">Author</p>
+              <p className="text-[28px] font-semibold text-black">Author</p>
               <div className="flex items-center gap-4 py-4">
                 <img
                   src={
@@ -251,7 +253,7 @@ function CourseDetails() {
                   alt="Author"
                   className="h-14 w-14 rounded-full object-cover"
                 />
-                <p className="text-lg">{`${instructor.firstName} ${instructor.lastName}`}</p>
+                <p className="text-lg text-black">{`${instructor.firstName} ${instructor.lastName}`}</p>
               </div>
               <p className="text-richblack-50">
                 {instructor?.additionalDetails?.about}
