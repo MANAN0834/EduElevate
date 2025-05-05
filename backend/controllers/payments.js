@@ -42,7 +42,7 @@ exports.capturePayment = async (req, res) => {
       }
 
       // Add the price of the course to the total amount
-      // total_amount += course.price
+      total_amount += course.price
     } catch (error) {
       console.log(error)
       return res.status(500).json({ success: false, message: error.message })
