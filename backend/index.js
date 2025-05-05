@@ -17,7 +17,7 @@ const PORT=process.env.PORT;
 // Middlewares
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({origin:"https://eduelevate-1-7ck3.onrender.com",credentials:true}))
+app.use(cors())
 app.use(fileUpload({useTempFiles:true,tempFileDir:"/tmp"}))
 
 cloudinaryConnect();
