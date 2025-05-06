@@ -72,24 +72,68 @@ exports.capturePayment = async (req, res) => {
 }
 
 // verify the payment
+// exports.verifyPayment = async (req, res) => {
+//   const courseID = req.body.courseID
+//   console.log("VPB" + courseID)
+//   const userId = req.user.id
+
+//   if (!courseID || !userId) {
+//     return res
+//       .status(200)
+//       .json({ success: false, message: `"Paymen Failed,${userId}` })
+//   }
+
+//   try {
+//     await enrollStudents(courseID, userId, res)
+//     return res.status(200).json({ success: true, message: "Payment Verified" })
+//   } catch (err) {
+//     console.log("eroor" + err)
+//   }
+// }
 exports.verifyPayment = async (req, res) => {
-  const courseID = req.body.courseID
-  console.log("VPB" + courseID)
-  const userId = req.user.id
-
-  if (!courseID || !userId) {
-    return res
-      .status(200)
-      .json({ success: false, message: `"Paymen Failed,${userId}` })
-  }
-
   try {
-    await enrollStudents(courseID, userId, res)
-    return res.status(200).json({ success: true, message: "Payment Verified" })
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      courses,
+    } = req.body;
+
+    const userId = req.user.id;
+
+    if (
+      !razorpay_order_id ||
+      !razorpay_payment_id ||
+      !razorpay_signature ||
+      !courses ||
+      courses.length === 0
+    ) {
+      return res.status(400).json({ success: false, message: "Missing fields" });
+    }
+
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_SECRET)
+      .update(body.toString())
+      .digest("hex");
+
+    if (expectedSignature !== razorpay_signature) {
+      return res.status(400).json({ success: false, message: "Payment verification failed" });
+    }
+
+    // Enroll the student into all courses
+    for (const courseId of courses) {
+      await enrollStudents(courseId, userId, res);
+    }
+
+    res.status(200).json({ success: true, message: "Payment Verified" });
+
   } catch (err) {
-    console.log("eroor" + err)
+    console.error("Verification Error:", err);
+    res.status(500).json({ success: false, message: "Internal error during verification" });
   }
-}
+};
 
 // Send Payment Success Email
 exports.sendPaymentSuccessEmail = async (req, res) => {

@@ -1,11 +1,9 @@
 import { useEffect } from "react"
-
 import "./App.css"
 // Redux
 import { useDispatch, useSelector } from "react-redux"
 // React Router
 import { Route, Routes, useNavigate } from "react-router-dom"
-
 // Components
 import Navbar from './components/Common/Navbar'
 import OpenRoute from "./components/core/Auth/OpenRoute"
@@ -18,7 +16,7 @@ import Instructor from "./components/core/Dashboard/Instructor"
 import MyCourses from "./components/core/Dashboard/MyCourses"
 import MyProfile from "./components/core/Dashboard/MyProfile"
 import Settings from "./components/core/Dashboard/Settings"
-// import VideoDetails from "./components/core/ViewCourse/VideoDetails"
+import VideoDetails from "./components/core/ViewCourse/VideoDetails"
 import About from "./pages/About"
 import Catalog from "./pages/Catalog"
 import Contact from "./pages/Contact"
@@ -32,11 +30,12 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import UpdatePassword from "./pages/UpdatePassword"
 import VerifyEmail from "./pages/VerifyEmail"
-// import ViewCourse from "./pages/ViewCourse"
+import ViewCourse from "./pages/ViewCourse"
 import { getUserDetails } from "./services/operations/profileAPI"
 import { ACCOUNT_TYPE } from "./utils/constants"
 
 function App() {
+ 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.profile)
@@ -137,7 +136,7 @@ function App() {
         </Route>
 
         {/* For the watching course lectures */}
-        {/* <Route
+        <Route
           element={
             <PrivateRoute>
               <ViewCourse />
@@ -152,7 +151,7 @@ function App() {
               />
             </>
           )}
-        </Route> */}
+        </Route>
 
         {/* 404 Page */}
         { <Route path="*" element={<Error />} /> }
