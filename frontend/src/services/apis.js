@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4000/api/v1" ;
+const BASE_URL = process.env.BACKEND_URL ;
 //  "https://eduelevate-pg5j.onrender.com/api/v1";
 
 // http://localhost:4000/api/v1
