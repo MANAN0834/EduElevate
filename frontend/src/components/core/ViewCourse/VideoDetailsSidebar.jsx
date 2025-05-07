@@ -40,14 +40,14 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
 
   return (
     <>
-      <div className="flex h-[calc(100vh-3.5rem)] w-[320px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800">
-        <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25">
+      <div className="flex h-[calc(100vh-3.5rem)] w-[320px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-customYellow">
+        <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-black">
           <div className="flex w-full items-center justify-between ">
             <div
               onClick={() => {
                 navigate(`/dashboard/enrolled-courses`)
               }}
-              className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90"
+              className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-customYellow p-1 text-richblack-700 hover:scale-90"
               title="back"
             >
               <IoIosArrowBack size={30} />
@@ -96,13 +96,13 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
 
               {/* Sub Sections */}
               {activeStatus === course?._id && (
-                <div className="transition-[height] duration-500 ease-in-out">
+                <div className="transition-[height] duration-500 ease-in-out text-black">
                   {course.subSection.map((topic, i) => (
                     <div
                       className={`flex gap-3  px-5 py-2 ${
                         videoBarActive === topic._id
-                          ? "bg-yellow-200 font-semibold text-richblack-800"
-                          : "hover:bg-richblack-900"
+                          ? "bg-caribbeangreen-50 font-semibold text-richblack-800"
+                          : "hover:bg-caribbeangreen-50 "
                       } `}
                       key={i}
                       onClick={() => {
@@ -116,6 +116,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                         type="checkbox"
                         checked={completedLectures.includes(topic?._id)}
                         onChange={() => {}}
+                        className="text-white"
                       />
                       {topic.title}
                     </div>

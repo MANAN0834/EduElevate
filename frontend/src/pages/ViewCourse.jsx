@@ -17,22 +17,41 @@ export default function ViewCourse() {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const [reviewModal, setReviewModal] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     ;(async () => {
-      const courseData = await getFullDetailsOfCourse(courseId, token)
-      // console.log("Course Data here... ", courseData.courseDetails)
-      dispatch(setCourseSectionData(courseData.courseDetails.courseContent))
-      dispatch(setEntireCourseData(courseData.courseDetails))
-      dispatch(setCompletedLectures(courseData.completedVideos))
-      let lectures = 0
-      courseData?.courseDetails?.courseContent?.forEach((sec) => {
-        lectures += sec.subSection.length
-      })
-      dispatch(setTotalNoOfLectures(lectures))
+      try {
+        const courseData = await getFullDetailsOfCourse(courseId, token)
+
+        if (!courseData?.courseDetails) throw new Error("No course data")
+
+        dispatch(setCourseSectionData(courseData.courseDetails.courseContent))
+        dispatch(setEntireCourseData(courseData.courseDetails))
+        dispatch(setCompletedLectures(courseData.completedVideos))
+
+        let lectures = 0
+        courseData?.courseDetails?.courseContent?.forEach((sec) => {
+          lectures += sec?.subSection?.length || 0
+        })
+
+        dispatch(setTotalNoOfLectures(lectures))
+      } catch (err) {
+        console.error("Failed to load course details:", err)
+      } finally {
+        setLoading(false)
+      }
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (loading) {
+    return (
+      <div className="grid h-screen w-full place-items-center">
+        <div className="spinner" />
+      </div>
+    )
+  }
 
   return (
     <>

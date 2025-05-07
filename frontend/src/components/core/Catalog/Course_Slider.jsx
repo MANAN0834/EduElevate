@@ -14,13 +14,15 @@ import { FreeMode, Pagination } from 'swiper';
 import Course_Card from "./Course_Card"
 
 function Course_Slider({ Courses }) {
+  const loopEnabled = Courses?.length > 2;
+
   return (
     <>
       {Courses?.length ? (
         <Swiper
           slidesPerView={1}
           spaceBetween={25}
-          loop={true}
+          loop={loopEnabled}
           modules={[FreeMode, Pagination]}
           breakpoints={{
             1024: {
@@ -29,17 +31,18 @@ function Course_Slider({ Courses }) {
           }}
           className="max-h-[30rem]"
         >
-          {Courses?.map((course, i) => (
+          {Courses.map((course, i) => (
             <SwiperSlide key={i}>
               <Course_Card course={course} Height={"h-[250px]"} />
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <p className="text-xl text-black">No Course Found</p>
+        <p className="text-xl text-richblack-5">No Course Found</p>
       )}
     </>
-  )
+  );
 }
+
 
 export default Course_Slider;
