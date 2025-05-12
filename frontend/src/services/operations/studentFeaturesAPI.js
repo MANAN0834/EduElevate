@@ -5,7 +5,6 @@ import rzpLogo from "../../assets/Logo/ChatGPT Image Apr 5, 2025, 11_57_07 PM.pn
 import { setPaymentLoading } from "../../slices/courseSlice";
 import { resetCart } from "../../slices/cartSlice";
 
-
 const {COURSE_PAYMENT_API, COURSE_VERIFY_API, SEND_PAYMENT_SUCCESS_EMAIL_API} = studentEndpoints;
 
 function loadScript(src) {
