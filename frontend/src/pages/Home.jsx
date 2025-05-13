@@ -187,7 +187,7 @@ function Home() {
         </div> */}
       </div>
           <div className="border border-black bg-gradient-to-b from-[#11344c] via-[#027185] to-[#30e37a] flex justify-center text-white font-bold text-2xl mb-6 w-[50%] mx-auto rounded-2xl">
-            <a href="/EduElevate-android.apk" download className="p-7 hover:underline">Click Here To Download The Android App</a>
+            <a href="/edu-elevate.apk" download className="p-7 hover:underline">Click Here To Download The Android App</a>
           </div>
       {/* Footer */}
       <Footer />
