@@ -22,6 +22,10 @@ import ProfileDropdown from "../core/Auth/ProfileDropdown"
 //   }
 // ]
 function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+
+
   const { token } = useSelector((state) => state.auth)
   const { user } = useSelector((state) => state.profile)
   const { totalItems } = useSelector((state) => state.cart)
@@ -64,7 +68,61 @@ function Navbar() {
           <img src={logo} alt="Logo" width={160} height={32} loading="lazy" />
         </Link>
         {/* Navigation links */}
-        <nav className="hidden md:block">
+        {isMobileMenuOpen && (
+  <div className="absolute top-14 left-0 z-50 w-full bg-richblack-900 text-white p-4 md:hidden">
+    <ul className="flex flex-col gap-y-4">
+      {NavbarLinks.map((link, index) => (
+        <li key={index}>
+          {link.title === "Catalog" ? (
+            <>
+              <div
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => setIsCatalogOpen(!isCatalogOpen)}
+              >
+                <span>{link.title}</span>
+                <BsChevronDown className={`transition-transform ${isCatalogOpen ? "rotate-180" : ""}`} />
+              </div>
+              {isCatalogOpen && (
+                <ul className="mt-2 ml-4 flex flex-col gap-y-2">
+                  {loading ? (
+                    <li className="text-sm">Loading...</li>
+                  ) : subLinks?.length ? (
+                    subLinks.map((subLink, i) => (
+                      <li key={i}>
+                        <Link
+                          to={`/catalog/${subLink.name}`}
+                          onClick={() => {
+                            setIsCatalogOpen(false)
+                            setIsMobileMenuOpen(false)
+                          }}
+                          className="text-sm text-richblack-5"
+                        >
+                          {subLink.name}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="text-sm">No Courses Found</li>
+                  )}
+                </ul>
+              )}
+            </>
+          ) : (
+            <Link
+              to={link.path}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-richblack-5"
+            >
+              {link.title}
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+{/* Desktop Navigation Links */}
+ <nav className="hidden md:block">
           <ul className="flex gap-x-6 text-richblack-25">
             {NavbarLinks.map((link, index) => (
               <li key={index}>
@@ -147,9 +205,16 @@ function Navbar() {
           )}
           {token !== null && <ProfileDropdown />}
         </div>
-        <button className="mr-4 md:hidden">
+        {/* <button className="mr-4 md:hidden">
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
-        </button>
+        </button> */}
+        <button
+  className="mr-4 md:hidden"
+  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+>
+  <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+</button>
+
       </div>
     </div>
   )

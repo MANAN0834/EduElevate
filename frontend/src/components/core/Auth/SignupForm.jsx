@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { Link, matchPath, useLocation } from "react-router-dom"
 
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
@@ -200,6 +201,12 @@ function SignupForm() {
           Create Account
         </button>
       </form>
+      <div className="mt-4 text-center text-sm text-richblack-900">
+  Already have an account?{" "}
+  <Link to="/login" className="font-semibold text-caribbeangreen-200 hover:underline">
+    Log in
+  </Link>
+</div>
     </div>
   )
 }
