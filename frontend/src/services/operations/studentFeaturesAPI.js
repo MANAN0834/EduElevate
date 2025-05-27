@@ -45,26 +45,6 @@ export async function BuyCourse(token, courses, userDetails, navigate, dispatch)
             throw new Error(orderResponse.data.message);
         }
         console.log("PRINTING orderResponse", orderResponse);
-        //options
-        // const options = {
-        //     key: process.env.REACT_APP_RAZORPAY_KEY,
-        //     currency: orderResponse.data.message.currency,
-        //     amount: `${orderResponse.data.message.amount}`,
-        //     order_id:orderResponse.data.message.id,
-        //     name:"EduElevate",
-        //     description: "Thank You for Purchasing the Course",
-        //     image:rzpLogo,
-        //     prefill: {
-        //         name:`${userDetails.firstName}`,
-        //         email:userDetails.email
-        //     },
-        //     handler: function(response) {
-        //         //send successful wala mail
-        //         sendPaymentSuccessEmail(response, orderResponse.data.message.amount,token );
-        //         //verifyPayment
-        //         verifyPayment({...response, courses}, token, navigate, dispatch);
-        //     }
-        // }
         const paymentData = orderResponse.data.data;
         console.log("Razorpay Key:", process.env.REACT_APP_RAZORPAY_KEY);
 
