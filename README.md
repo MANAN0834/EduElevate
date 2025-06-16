@@ -62,3 +62,4 @@ Database: MongoDB Atlas
 
 📸 Screenshots
 ![alt text](homepage-1.png)
+![alt text](homepage-2.png) ![alt text](footer.png) ![alt text](aboutuspage.png) ![alt text](contactuspage.png) ![alt text](loginpage.png) ![alt text](signuppage.png) ![alt text](myprofilepage.png) ![alt text](enrolledcourses.png) ![alt text](cart.png) ![alt text](settingspage.png) ![alt text](displaycourses.png) ![alt text](otppage.png) ![alt text](courseDetails.png) ![alt text](razorpay.png) ![alt text](videodetails.png) ![alt text](reviewVideo.png) ![alt text](instructorDashboard.png) ![alt text](mycoursespage.png) ![alt text](<add course.png>)
